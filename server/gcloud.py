@@ -9,7 +9,7 @@ print("Connecting API...")
 client = vision.ImageAnnotatorClient()
 
 print("Getting image...")
-file_name = os.path.abspath('resources/recyclables_thumb[2].jpg')
+file_name = os.path.abspath('src/resources/recyclables_thumb[2].jpg')
 with io.open(file_name, 'rb') as image_file:
     content = image_file.read()
 image = types.Image(content=content)

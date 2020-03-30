@@ -6,6 +6,13 @@
 .idea/modules.xml
 .idea/recycler.iml
 key.json
-static/
-server/src/templates/
+server/templates/
 venv/
+.firebase/
+.firebaserc
+__pycache__
+firebase.json
+node_modules/
+package-lock.json
+package.json
+server/resources/
