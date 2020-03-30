@@ -1,17 +1,8 @@
-import io
 import os
-import json
+import io
+from config.gcloud_image import *
 
-from google.cloud import vision
-from google.cloud.vision import types
-from collections import Counter
-
-with io.open("labels.json", "r") as f:
-    LABELS = json.loads(f.read())
-
-client = vision.ImageAnnotatorClient()
-
-file_name = os.path.abspath('src/resources/recyclables_thumb[2].jpg')
+file_name = os.path.abspath('resources/recyclables_thumb[2].jpg')
 with io.open(file_name, 'rb') as image_file:
     content = image_file.read()
 image = types.Image(content=content)
@@ -29,7 +20,7 @@ for label, s in LABELS.items():
 if not c: print("Sorry, the server is currently full")
 print(c)
 
-# C:\Users\XPS\PycharmProjects\recycler\venv\Scripts\python.exe C:/Users/XPS/PycharmProjects/recycler/server/src/gcloud.py
+# C:\Users\XPS\PycharmProjects\recycler\venv\Scripts\python.exe C:/Users/XPS/PycharmProjects/recycler/server/src/gcloud_image.py
 # Connecting API...
 # Getting image...
 # localizing image...
@@ -52,7 +43,7 @@ print(c)
 # The above exception was the direct cause of the following exception:
 #
 # Traceback (most recent call last):
-#   File "C:/Users/XPS/PycharmProjects/recycler/server/src/gcloud.py", line 18, in <module>
+#   File "C:/Users/XPS/PycharmProjects/recycler/server/src/gcloud_image.py", line 18, in <module>
 #     response = client.object_localization(image=image)
 #   File "C:\Users\XPS\PycharmProjects\recycler\venv\lib\site-packages\google\cloud\vision_helpers\decorators.py", line 101, in inner
 #     response = self.annotate_image(request, retry=retry, timeout=timeout)
