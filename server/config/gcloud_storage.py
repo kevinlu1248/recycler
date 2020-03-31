@@ -3,6 +3,17 @@ import os
 
 storage_client = storage.Client()
 bucket_name = os.environ.get("MAIN_BUCKET")
+bucket = storage_client.bucket(bucket_name)
+ext_to_mime = {
+    "jpeg": "image/jpeg",
+    "png": "image/png",
+    "gif": "image/gif",
+    "bmp": "image/bmp",
+    "raw": "raw",
+    "ico": "image/ico",
+    "pdf": "application/pdf",
+    "tiff": "image/tiff",
+}
 
 
 def list_blobs_with_prefix(prefix, delimiter=None):
@@ -48,13 +59,12 @@ def list_blobs_with_prefix(prefix, delimiter=None):
     return blobs
 
 
-def upload_blob(source_file_name, destination_blob_name):
+def upload_blob_from_directory(source_file_name, destination_blob_name):
     """Uploads a file to the bucket."""
     # bucket_name = "your-bucket-name"
     # source_file_name = "local/path/to/file"
     # destination_blob_name = "storage-object-name"
 
-    bucket = storage_client.bucket(bucket_name)
     blob = bucket.blob(destination_blob_name)
     print(destination_blob_name)
     blob.upload_from_filename(source_file_name)
@@ -63,6 +73,25 @@ def upload_blob(source_file_name, destination_blob_name):
     print(
         "File {} uploaded to {} and can be founded at {}/{}".format(
             source_file_name, destination_blob_name, os.environ.get("GOOGLE_CLOUD_STORAGE_BUCKET"),
+            file_name
+        )
+    )
+
+
+def upload_blob_from_string(input_blob, destination_blob_name, mime="text/plain"):
+    """Uploads a file to the bucket."""
+    # bucket_name = "your-bucket-name"
+    # source_file_name = "local/path/to/file"
+    # destination_blob_name = "storage-object-name"
+
+    blob = bucket.blob(destination_blob_name)
+    print(destination_blob_name)
+    blob.upload_from_string(input_blob)
+    file_name = os.path.basename(destination_blob_name)
+
+    print(
+        "Blob string uploaded to {} and can be founded at {}/{}".format(
+            destination_blob_name, os.environ.get("GOOGLE_CLOUD_STORAGE_BUCKET"),
             file_name
         )
     )
@@ -77,7 +106,13 @@ def push_image_from_directory(source_file_name):
     """Pushes an image to the Cloud with extension x.ext, where x is the file id and ext is the extension."""
     # file_name = os.path.basename(source_file_name)
     _, file_extension = os.path.splitext(source_file_name)
-    upload_blob(source_file_name, "test_images/{}{}".format(test_image_id(), file_extension))
+    upload_blob_from_directory(source_file_name, "test_images/{}{}".format(test_image_id(), file_extension))
+
+
+def push_blob_from_string(input_blob, ext):
+    """Pushes an image to the Cloud with extension x.ext, where x is the file id and ext is the extension."""
+    mime = ext_to_mime[ext]
+    upload_blob_from_string(input_blob, "test_images/{}{}".format(test_image_id(), mime))
 
 
 if __name__ == '__main__':
