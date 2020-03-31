@@ -5,6 +5,7 @@ storage_client = storage.Client()
 bucket_name = os.environ.get("MAIN_BUCKET")
 bucket = storage_client.bucket(bucket_name)
 ext_to_mime = {
+    "jpg": "image/jpeg",
     "jpeg": "image/jpeg",
     "png": "image/png",
     "gif": "image/gif",
@@ -111,8 +112,8 @@ def push_image_from_directory(source_file_name):
 
 def push_blob_from_string(input_blob, ext):
     """Pushes an image to the Cloud with extension x.ext, where x is the file id and ext is the extension."""
-    mime = ext_to_mime[ext]
-    upload_blob_from_string(input_blob, "test_images/{}{}".format(test_image_id(), mime))
+    mime = ext_to_mime[ext.strip(".")]
+    upload_blob_from_string(input_blob, "test_images/{}{}".format(test_image_id(), ext), mime)
 
 
 if __name__ == '__main__':

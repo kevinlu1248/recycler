@@ -1,11 +1,10 @@
 # app.py
 # Required Imports
 import os
+import json
 from config import gcloud_storage
-from classifiers.gcloud import identifier
-import google.cloud
-from flask import Flask, Response, render_template, send_from_directory, send_file, request, redirect, url_for
-from werkzeug.utils import secure_filename
+from server.classifiers.gcloud import identifier
+from flask import Flask, Response, render_template, send_file, request
 
 # Initialize Flask App
 app = Flask(__name__, static_folder="../static")
@@ -26,13 +25,13 @@ accepted_image_types = {
 def index():
     app.logger.info("GET /".format())
     # app.logger.info(url_for('static', filename='img/favicon.ico'))
-    return render_template("index.html")
+    return render_template("frontend.html")
 
 
 @app.route('/static/<path:path>')
 def send_js(path):
     app.logger.info("Call to /static/{}".format(path))
-    app.logger.info(send_file(send_file("..\\static\\" + path)))
+    app.logger.info(send_file("..\\static\\" + path))
     return send_file("..\\static\\" + path)
 
 
@@ -44,9 +43,11 @@ def classify():
 
     file = request.files['image']
     _, ext = os.path.splitext(file.filename)
-    gcloud_storage.push_blob_from_string(file.read(), ext)
-
-    return Response(response="It went through!", status=200)
+    blob = file.read()
+    gcloud_storage.push_blob_from_string(blob, ext)
+    results = identifier.identify_from_string(blob)
+    print(results)
+    return Response(response=results, status=200, mimetype="application/json")
 
 
 port = int(os.environ.get('PORT', 8080))

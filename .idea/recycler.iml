@@ -20,7 +20,7 @@
     <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/../recycler\templates" />
+        <option value="$MODULE_DIR$/server/templates" />
       </list>
     </option>
   </component>
