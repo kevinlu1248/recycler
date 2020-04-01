@@ -28,7 +28,7 @@ def identify_from_string(blob):
     if not c: print("Sorry, the server is currently full.")
 
     # Laplace rule of succession
-    sm = sum(c[k] + 1 for k in c)
+    sm = sum(c[k] + 1 for k in TYPES)
     mx = max(c, key=lambda k: c[k])
     normalized = {t: (c[t] + 1) / sm for t in TYPES}
     results = {

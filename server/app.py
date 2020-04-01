@@ -1,5 +1,6 @@
 # app.py
 # Required Imports
+# recycler-7dc49
 import os
 import json
 from config import gcloud_storage
@@ -53,3 +54,10 @@ def classify():
 port = int(os.environ.get('PORT', 8080))
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port, debug=True)
+
+# gcloud projects add-iam-policy-binding recycler-7dc49 --member="serviceAccount:service-998017231527@gcp-sa-automl.iam.gserviceaccount.com" --role="roles/storage.admin"
+# gsutil mb -p recycler-7dc49 -c regional -l us-central1 gs://recycler-7dc49-vcm/
+# set GOOGLE_APPLICATION_CREDENTIALS=C:\Users\XPS\Recycler-f84417bf5f6d.json
+# gsutil -m cp -R gs://cloud-ml-data/img/flower_photos/  gs://recycler-7dc49-vcm/img/
+# gsutil cat gs://recycler-7dc49-vcm/img/flower_photos/all_data.csv | sed "s:cloud-ml-data:recycler-7dc49-vcm:" > all_data.csv
+# gsutil cp all_data.csv gs://recycler-7dc49-vcm/csv/
