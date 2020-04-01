@@ -15,5 +15,5 @@ firebase.json
 node_modules/
 package-lock.json
 package.json
-server/resources/
+resources/
 .env

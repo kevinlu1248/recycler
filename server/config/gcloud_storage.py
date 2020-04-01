@@ -117,4 +117,4 @@ def push_blob_from_string(input_blob, ext):
 
 
 if __name__ == '__main__':
-    push_image_from_directory("../resources/recyclables_thumb[2].jpg")
+    push_image_from_directory("../../resources/recyclables_thumb[2].jpg")

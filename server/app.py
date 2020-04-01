@@ -4,6 +4,7 @@
 import os
 import json
 from config import gcloud_storage
+from server.classifiers.automl import classifier
 from server.classifiers.gcloud import identifier
 from flask import Flask, Response, render_template, send_file, request
 
@@ -46,7 +47,8 @@ def classify():
     _, ext = os.path.splitext(file.filename)
     blob = file.read()
     gcloud_storage.push_blob_from_string(blob, ext)
-    results = identifier.identify_from_string(blob)
+    # results = identifier.identify_from_string(blob)
+    results = classifier.get_prediction(blob)
     print(results)
     return Response(response=results, status=200, mimetype="application/json")
 
