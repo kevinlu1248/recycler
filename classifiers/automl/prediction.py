@@ -3,7 +3,7 @@ from google.cloud import automl
 # TODO(developer): Uncomment and set the following variables
 project_id = "recycler-7dc49"
 model_id = "ICN7596899670257827840"
-file_path = "classifiers/automl/tulip-divisions.jpg"
+file_path = "tulip-divisions.jpg"
 
 prediction_client = automl.PredictionServiceClient()
 

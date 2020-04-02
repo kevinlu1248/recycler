@@ -4,12 +4,12 @@
 import os
 import json
 from config import gcloud_storage
-from server.classifiers.automl import classifier
-from server.classifiers.gcloud import identifier
+from classifiers.automl import classifier
+from classifiers.gcloud import identifier
 from flask import Flask, Response, render_template, send_file, request
 
 # Initialize Flask App
-app = Flask(__name__, static_folder="../static")
+app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = "tmp"
 accepted_image_types = {
     "jpeg",
@@ -26,15 +26,14 @@ accepted_image_types = {
 @app.route('/')
 def index():
     app.logger.info("GET /".format())
-    # app.logger.info(url_for('static', filename='img/favicon.ico'))
     return render_template("frontend.html")
 
 
-@app.route('/static/<path:path>')
-def send_js(path):
-    app.logger.info("Call to /static/{}".format(path))
-    app.logger.info(send_file("..\\static\\" + path))
-    return send_file("..\\static\\" + path)
+# @app.route('/static/<path:path>')
+# def send_js(path):
+#     app.logger.info("Call to /static/{}".format(path))
+#     app.logger.info(send_file("..\\static\\" + path))
+#     return send_file("..\\static\\" + path)
 
 
 @app.route('/classify', methods=['POST'])

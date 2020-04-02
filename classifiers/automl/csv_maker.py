@@ -7,7 +7,7 @@ dic = {
     "trash": 137
 }
 
-with open("data.csv", "a") as f:
+with open("../../data.csv", "a") as f:
     for k in dic:
         for i in range(1, dic[k] + 1):
             f.write("gs://recycler-7dc49-vcm/dataset-resized/{}/{}{}.jpg,{}\n".format(k, k, i, k))

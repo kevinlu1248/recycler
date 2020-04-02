@@ -28,7 +28,7 @@ def get_prediction(content):
 
 
 if __name__ == '__main__':
-    file_path = "classifiers/automl/tulip-divisions.jpg"
+    file_path = "tulip-divisions.jpg"
     with open(file_path, 'rb') as ff:
         content = ff.read()
     print(get_prediction(content))
