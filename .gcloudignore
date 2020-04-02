@@ -12,7 +12,7 @@ firebase.json
 key.json
 package-lock.json
 package.json
-config/gcloud_image.py.py
+config/gcloud_image.py
 classifiers/gcloud/gcloud.py
 classifiers/gcloud/recyclable_type.py
 classifiers/automl/csv_maker.py

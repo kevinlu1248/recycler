@@ -17,6 +17,24 @@ ext_to_mime = {
 }
 
 
+def download_blob(source_blob_name):
+    """Downloads a blob from the bucket."""
+    # bucket_name = "your-bucket-name"
+    # source_blob_name = "storage-object-name"
+    # destination_file_name = "local/path/to/file"
+
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(bucket_name)
+    blob = bucket.blob(source_blob_name)
+    print(
+        "Blob {} downloaded.".format(
+            source_blob_name
+        )
+    )
+
+    return blob
+
+
 def list_blobs_with_prefix(prefix, delimiter=None):
     """Lists all the blobs in the bucket that begin with the prefix.
 
