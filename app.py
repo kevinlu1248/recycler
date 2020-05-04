@@ -3,9 +3,11 @@
 # recycler-7dc49
 import os
 import json
-from config import gcloud_storage
-from classifiers.automl import classifier
-from classifiers.gcloud import identifier
+import classifiers
+from classifiers.gcloud.new_identifier import predict_from_binary
+# from config import gcloud_storage
+# from classifiers.automl import classifier
+# from classifiers.gcloud import identifier
 from flask import Flask, Response, render_template, send_file, request
 
 # Initialize Flask App
@@ -29,13 +31,6 @@ def index():
     return render_template("frontend.html")
 
 
-# @app.route('/static/<path:path>')
-# def send_js(path):
-#     app.logger.info("Call to /static/{}".format(path))
-#     app.logger.info(send_file("..\\static\\" + path))
-#     return send_file("..\\static\\" + path)
-
-
 @app.route('/classify', methods=['POST'])
 def classify():
     # form = request.form['submit']
@@ -45,9 +40,10 @@ def classify():
     file = request.files['image']
     _, ext = os.path.splitext(file.filename)
     blob = file.read()
-    gcloud_storage.push_blob_from_string(blob, ext)
-    # results = identifier.identify_from_string(blob)
-    results = classifier.get_prediction(blob)
+    # gcloud_storage.push_blob_from_string(blob, ext)
+
+    results = predict_from_binary(blob)
+    # results = classifier.get_prediction(blob)
     print(results)
     return Response(response=results, status=200, mimetype="application/json")
 
