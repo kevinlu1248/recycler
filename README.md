@@ -1,5 +1,5 @@
 # Recycler
-For sorting recyclables using Google AutoML. Try it out at http://recycler.duckdns.org/.
+For sorting recyclables via image recognition. Try it out at http://recycler.duckdns.org/.
 
 ## Process:
 I started by directly using Google Vision ML API but it gave information that was too vague to use to classify the recyclables.
