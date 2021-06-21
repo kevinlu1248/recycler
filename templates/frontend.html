@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Recycler</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='favicon/favicon-96x96.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon/favicon-16x16.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lib/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kaushan+Script">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lib/styles.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+
+<body id="page-top">
+<nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-dark" id="mainNav">
+    <div class="container"><a class="navbar-brand text-info" href="#page-top" style="color: !important #00b760;">Recycler</a>
+        <button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right"
+                type="button" data-toogle="collapse" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation" style="background-color: #00b760;"><i
+                class="fa fa-bars"></i></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="nav navbar-nav ml-auto text-uppercase">
+                <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#services">try it
+                    out!</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger"
+                                                            href="#contact">Contact</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger"
+                                                            href="https://github.com/kevinlu1248/recycler">Github</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<header class="masthead"
+        style="background-image: url({{ url_for('static', filename='img/lcRjYAU.jpg') }});background-attachment: fixed;">
+    <div class="container">
+        <div class="intro-text">
+            <div class="intro-lead-in"><span>Welcome to Recycler!</span></div>
+            <div class="intro-heading text-uppercase"><span>automated recyclable sorting</span></div>
+            <a class="btn btn-info btn-xl text-uppercase js-scroll-trigger" role="button" href="#trial"
+               style="background-color: #00b760;border: #00b760;">try it out!</a></div>
+    </div>
+</header>
+<section id="trial">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="text-uppercase section-heading">Drop your image below and click upload</h2>
+                <h3 class="text-muted section-subheading">We'll tell you what type of recyclable it is!</h3>
+            </div>
+        </div>
+        <div class="row text-center submitter">
+            <div class="col-md-4">
+                <h4 class="section-heading">Drop your image here!</h4>
+                <form
+                        id="image-upload"
+                        class="box d-flex align-items-center justify-content-center"
+                        method="POST"
+                        enctype="multipart/form-data">
+                    <!--                        <input type="file" name="image" id="image">-->
+                    <div class="align-middle">
+                        <div class="box__input">
+                            <input class="box__file d-none" type="file" name="image" id="image"
+                                   data-multiple-caption="{count} files selected" multiple/>
+                            <label id="image-label" class="mb-0" for="image"><strong>Choose a file</strong><span
+                                    class="box__dragndrop"> or drag it here</span>.</label>
+                        </div>
+                        <div class="box__uploading">Uploading&hellip;</div>
+                        <div class="box__success">Done. Click or drag image here to upload another image.</div>
+                        <div class="box__error">Error! Please try again.<span></span>.</div>
+                        <button id="submit" class="box__button mt-2" name="submit" type="submit" disabled>Upload
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <h4 class="section-heading">Your image</h4>
+                <div class="image-container d-flex align-items-center justify-content-center">
+                    <img id="selected-image">
+                </div>
+
+            </div>
+            <div class="col-md-4 ">
+                <h4 class="section-heading">It is...</h4>
+                <div class="d-flex align-items-center justify-content-center">
+                    <div>
+                        <h3 id="classification" class="display-4 text-center"></h3>
+                        <ul id="output" class="text-center"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="article-dual-column">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <div class="intro">
+                    <h1 class="text-center">What I used</h1>
+                    <p class="text-center"></p><img class="img-fluid d-none" src="../../static/img/desk.jpg"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-lg-3 offset-md-1">
+                <div class="toc">
+                    <p>Table of Contents</p>
+                    <ul>
+                        <li><a href="#intro">Introduction</a></li>
+                        <!--                            <li><a href="#">V2 Antiplasti</a></li>-->
+                        <li><a href="#process">Process</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-10 col-lg-7 offset-md-1 offset-lg-0">
+                <div class="text">
+                    <h3 id="intro">Recycler</h3>
+                    <p>
+                        For sorting recyclables using Google AutoML. Try it out at
+                        <a href="https://recycler-mvdcj7favq-uc.a.run.app">https://recycler-mvdcj7favq-uc.a.run.app</a>.
+                    </p>
+                    <h3 id="process">Process</h3>
+                    <p>
+                        I started by directly using Google Vision ML API but it gave information that was too vague to
+                        use to classify the recyclables.
+                        It gave me information such as "bottle", or "products", so I tried using Google AutoML, which
+                        was a lot more accurate
+                        (96% precision). Huge shoutout to Gary Thung's dataset at
+                        <a href="https://github.com/garythung/trashnet">https://github.com/garythung/trashnet</a>.
+                        I am planning also to
+                        add more from Huawei's garbage sorting competition <a
+                            href="https://competition.huaweicloud.com/information/1000007620/circumstances?track=107">https://competition.huaweicloud.com/information/1000007620/circumstances?track=107</a>
+                        ,
+                        which has around 20000 images, although the majority of them don't apply to this project.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="py-5 contributers">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-4"><a href="https://cloud.google.com/automl"><img
+                    class="img-fluid d-block mx-auto"
+                    src="https://upload.wikimedia.org/wikipedia/commons/6/60/Cloud-AutoML-Logo.svg"></a>
+            </div>
+            <div class="col-sm-6 col-md-4 text-center"><a href="https://github.com/garythung/trashnet"><h1
+                    class="display-4 text-dark">Trashnet</h1</a>
+            </div>
+            <div class="col-sm-6 col-md-4"><a href="https://cloud.google.com/automl"><img
+                    class="img-fluid d-block mx-auto"
+                    src="https://seeklogo.com/images/G/google-cloud-run-logo-895F1305FF-seeklogo.com.png"></a>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="contact" style="background-image:url('../../static/img/map-image.png');">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="text-uppercase section-heading">Contact Me!</h2>
+                <h3 class="section-subheading text-muted">Tell me if there are any errors.</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <form id="contactForm" name="contactForm" novalidate="novalidate">
+                    <div class="form-row">
+                        <div class="col col-md-6">
+                            <div class="form-group"><input class="form-control" type="text" id="name"
+                                                           placeholder="Your Name *" required=""><small
+                                    class="form-text text-danger flex-grow-1 help-block lead"></small></div>
+                            <div class="form-group"><input class="form-control" type="email" id="email"
+                                                           placeholder="Your Email *" required=""><small
+                                    class="form-text text-danger help-block lead"></small></div>
+                            <div class="form-group"><input class="form-control" type="tel" placeholder="Your Phone *"
+                                                           required=""><small
+                                    class="form-text text-danger help-block lead"></small></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group"><textarea class="form-control" id="message"
+                                                              placeholder="Your Message *" required=""></textarea><small
+                                    class="form-text text-danger help-block lead"></small></div>
+                        </div>
+                        <div class="col">
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 text-center">
+                        <div id="success"></div>
+                        <button class="btn btn-primary btn-xl text-uppercase" id="sendMessageButton" type="submit">Send
+                            Message
+                        </button>
+                    </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    </div>
+</section>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"><span class="copyright">Copyright&nbsp;© Recycler 2020</span></div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons d-none">
+                    <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline quicklinks d-none">
+                    <li class="list-inline-item"><a class="d-none" href="#">Privacy Policy</a></li>
+                    <li class="list-inline-item"><a href="#">Terms of Use</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="modal fade portfolio-modal text-center" role="dialog" tabindex="-1" id="portfolioModal1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 mx-auto">
+                            <div class="modal-body">
+                                <h2 class="text-uppercase">Project Name</h2>
+                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p><img
+                                    class="img-fluid d-block mx-auto" src="../../static/img/portfolio/1-full.jpg">
+                                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
+                                    adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
+                                    repellat aperiam quasi sunt officia expedita beatae
+                                    cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                                <ul class="list-unstyled">
+                                    <li>Date: January 2017</li>
+                                    <li>Client: Threads</li>
+                                    <li>Category: Illustration</li>
+                                </ul>
+                                <button class="btn btn-primary" data-dismiss="modal" type="button"><i
+                                        class="fa fa-times"></i><span>&nbsp;Close Project</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade portfolio-modal text-center" role="dialog" tabindex="-1" id="portfolioModal2">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 mx-auto">
+                            <div class="modal-body">
+                                <h2 class="text-uppercase">Project Name</h2>
+                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p><img
+                                    class="img-fluid d-block mx-auto" src="../../static/img/portfolio/2-full.jpg">
+                                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
+                                    adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
+                                    repellat aperiam quasi sunt officia expedita beatae
+                                    cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                                <ul class="list-unstyled">
+                                    <li>Date: January 2017</li>
+                                    <li>Client: Threads</li>
+                                    <li>Category: Illustration</li>
+                                </ul>
+                                <button class="btn btn-primary" data-dismiss="modal" type="button"><i
+                                        class="fa fa-times"></i><span>&nbsp;Close Project</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade portfolio-modal text-center" role="dialog" tabindex="-1" id="portfolioModal3">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 mx-auto">
+                            <div class="modal-body">
+                                <h2 class="text-uppercase">Project Name</h2>
+                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p><img
+                                    class="img-fluid d-block mx-auto" src="../../static/img/portfolio/3-full.jpg">
+                                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
+                                    adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
+                                    repellat aperiam quasi sunt officia expedita beatae
+                                    cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                                <ul class="list-unstyled">
+                                    <li>Date: January 2017</li>
+                                    <li>Client: Threads</li>
+                                    <li>Category: Illustration</li>
+                                </ul>
+                                <button class="btn btn-primary" data-dismiss="modal" type="button"><i
+                                        class="fa fa-times"></i><span>&nbsp;Close Project</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade portfolio-modal text-center" role="dialog" tabindex="-1" id="portfolioModal4">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 mx-auto">
+                            <div class="modal-body">
+                                <h2 class="text-uppercase">Project Name</h2>
+                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p><img
+                                    class="img-fluid d-block mx-auto" src="../../static/img/portfolio/4-full.jpg">
+                                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
+                                    adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
+                                    repellat aperiam quasi sunt officia expedita beatae
+                                    cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                                <ul class="list-unstyled">
+                                    <li>Date: January 2017</li>
+                                    <li>Client: Threads</li>
+                                    <li>Category: Illustration</li>
+                                </ul>
+                                <button class="btn btn-primary" data-dismiss="modal" type="button"><i
+                                        class="fa fa-times"></i><span>&nbsp;Close Project</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade portfolio-modal text-center" role="dialog" tabindex="-1" id="portfolioModal5">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 mx-auto">
+                            <div class="modal-body">
+                                <h2 class="text-uppercase">Project Name</h2>
+                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p><img
+                                    class="img-fluid d-block mx-auto" src="../../static/img/portfolio/5-full.jpg">
+                                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
+                                    adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
+                                    repellat aperiam quasi sunt officia expedita beatae
+                                    cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                                <ul class="list-unstyled">
+                                    <li>Date: January 2017</li>
+                                    <li>Client: Threads</li>
+                                    <li>Category: Illustration</li>
+                                </ul>
+                                <button class="btn btn-primary" data-dismiss="modal" type="button"><i
+                                        class="fa fa-times"></i><span>&nbsp;Close Project</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade portfolio-modal text-center" role="dialog" tabindex="-1" id="portfolioModal6">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 mx-auto">
+                            <div class="modal-body">
+                                <h2 class="text-uppercase">Project Name</h2>
+                                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p><img
+                                    class="img-fluid d-block mx-auto" src="../../static/img/portfolio/6-full.jpg">
+                                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
+                                    adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
+                                    repellat aperiam quasi sunt officia expedita beatae
+                                    cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                                <ul class="list-unstyled">
+                                    <li>Date: January 2017</li>
+                                    <li>Client: Threads</li>
+                                    <li>Category: Illustration</li>
+                                </ul>
+                                <button class="btn btn-primary" data-dismiss="modal" type="button"><i
+                                        class="fa fa-times"></i><span>&nbsp;Close Project</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<script src="{{ url_for('static', filename='js/lib/script.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

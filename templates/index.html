@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recycler</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lib/bootstrap.min.css') }}">
+</head>
+<body>
+
+Hello World
+<form
+        id="image-upload"
+        method="POST"
+        enctype="multipart/form-data">
+    Select image to upload:
+    <input type="file" name="image" id="image">
+    <br>
+    <input type="submit" value="Submit!" name="submit">
+</form>
+
+<h3 id="classification" class="display-4"></h3>
+
+<ul id="output"></ul>
+
+<!--Might get Popper-->
+<script src="{{ url_for('static', filename='js/lib/jquery.js') }}"></script>
+<script src="{{ url_for('static', filename='js/lib/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+</html>

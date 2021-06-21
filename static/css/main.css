@@ -1,0 +1,102 @@
+body, html {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.masthead {
+    height: 100vh;
+}
+
+#selected-image {
+    width: 100%;
+}
+
+.box {
+    height: 15rem;
+    cursor: pointer;
+}
+
+#image-label {
+    cursor: pointer;
+}
+
+.box__dragndrop,
+.box__uploading,
+.box__success,
+.box__error {
+    display: none;
+}
+
+.box.has-advanced-upload {
+    background-color: white;
+    outline: 2px dashed black;
+    /*outline-offset: -10px;*/
+}
+
+.box.has-advanced-upload .box__dragndrop {
+    display: inline;
+    cursor: default;
+}
+
+.box.is-dragover {
+    background-color: grey;
+}
+
+.box.is-success .box__input, .box.is-uploading .box__input {
+    display: none;
+
+}
+
+.box.is-uploading .box__uploading {
+    display: block;
+}
+
+
+.box.is-success .box__success{
+    display: block;
+}
+
+.box__button {
+    background: none;
+    border: none;
+    font-weight: bold;
+}
+
+.image-container {
+    overflow: hidden;
+    height: 15rem;
+    background-color: lightgrey;
+}
+
+.submitter .section-heading {
+    margin-bottom: 2rem;
+}
+
+#classification {
+    font-size: 2.5rem;
+}
+
+a, a:hover {
+    color: #00b760;
+}
+
+#mainNav .navbar-nav .nav-item .nav-link:hover {
+    color: #00b760;
+}
+
+.btn-primary {
+    background-color: #00b760;
+    border-color:  #00b760;
+}
+
+label::selection, div::selection, span::selection, strong::selection, button::selection {
+    background-color: #00b760;
+}
+
+.contributers div.col-sm-6 img {
+    height: 5rem;
+}
+
+#mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover {
+    color: #00b760;
+}
