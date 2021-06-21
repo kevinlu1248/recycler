@@ -3,7 +3,7 @@
 import os
 import json
 import classifiers
-from classifiers.gcloud.new_identifier import predict_from_binary
+from classifiers.identifier import predict_from_binary
 from flask import Flask, Response, render_template, send_file, request
 
 # Initialize Flask App
