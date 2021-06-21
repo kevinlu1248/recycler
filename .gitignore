@@ -1,0 +1,21 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/.gitignore
+.idea/codeStyles/
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/recycler.iml
+key.json
+server/templates/
+env
+.firebase/
+.firebaserc
+__pycache__
+firebase.json
+node_modules/
+package-lock.json
+package.json
+resources/
+.env
+classifiers/gcloud/xception_256.h5
+recycler_tfmodel
