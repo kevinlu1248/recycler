@@ -8,7 +8,7 @@ from io import BytesIO
 # import cv2
 
 classes = ["cardboard", "glass", "metal", "paper", "plastic", "trash"]
-model = keras.models.load_model('classifiers/gcloud/100epochs.h5')
+model = keras.models.load_model('classifiers/xception_64_32.h5')
 # model = keras.models.load_model('recycler_tfmodel/models/100epochs.h5')
 
 def predict_from_binary(b):
