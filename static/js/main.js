@@ -12,6 +12,7 @@ $(document).ready(() => {
         console.log($("#image")[0].files[0]);
         fr.readAsDataURL($("#image")[0].files[0]);
         $("#submit").removeAttr("disabled");
+        $("#image-upload").submit();
     });
 
     // drag and drop image
@@ -40,7 +41,8 @@ $(document).ready(() => {
         droppedFile = droppedFiles[0];
         $("#image-label").html(droppedFile.name);
         fr.readAsDataURL(droppedFile);
-        $("#submit").attr("disabled", false);
+        //$("#submit").attr("disabled", false);
+        $("#image-upload").submit();
     });
 
     // make box clickable
